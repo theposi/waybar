@@ -1,0 +1,213 @@
+{
+	// Rofi Application Launcher
+	"custom/appmenu": {
+		"format": "Apps",
+		"on-click": "rofi -show drun -replace",
+		"on-click-right": "~/.config/hypr/scripts/keybindings.sh",
+		"tooltip": false
+	},
+
+	// Waybar theme switcher
+	"custom/themeswitcher": {
+		"format": "",
+		"on-click": "~/.config/waybar/scripts/themeswitcher.sh",
+		"tooltip": false
+	},
+
+	// Hyprland Window
+	"hyprland/window": {
+		"rewrite": {
+			"(.*) - Brave": "$1",
+			"(.*) - Chromium": "$1",
+			"(.*) - Brave Search": "$1",
+			"(.*) - Outlook": "$1",
+			"(.*) Microsoft Teams": "$1"
+		},
+		"separate-outputs": true
+	},
+
+	"group/left-modules": {
+		"orientation": "inherit",
+		"modules": [
+			"custom/appmenu",
+			"custom/themeswitcher",
+			"hyprland/window"
+		]
+	},
+
+	// Workspaces
+	"hyprland/workspaces" : {
+		"on-click": "activate",
+		"active-only": false,
+		"all-outputs": true,
+		"format": "{}",
+		"format-icons": {
+			"urgent": "",
+			"active": "",
+			"default": ""
+		},
+		"persistent-workspaces": {
+			"*": 5
+		}       
+	},
+
+	// Pulseaudio
+	"pulseaudio": {
+		// "scroll-step": 1, // %, can be a float
+		"format": "{icon} {volume}%",
+		"format-bluetooth": "{volume}%  {icon} {format_source}",
+		"format-bluetooth-muted": "  {icon} {format_source}",
+		"format-muted": "  {format_source}",
+		"format-source": "{volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", " ", " "]
+		},
+		"on-click": "pavucontrol"
+	},
+
+	// Bluetooth
+	"bluetooth": {
+		"format-disabled": "",
+		"format-off": "",
+		"interval": 30,
+		"on-click": "blueman-manager",
+		"format-no-controller": ""
+	},
+
+	// Keyboard 
+	"keyboard-state": {
+		"capslock": true,
+		"format": {
+			"capslock": "{icon}"                                                                                                                                                       
+		},
+		"format-icons": {
+			"unlocked": "",
+			"locked": "CAPS",
+		}
+	},
+
+	// System
+	"custom/system": {
+		"format": "󰍛",
+		"tooltip": false
+	},
+
+	// CPU
+	"cpu": {
+		"format": "/ CPU {usage}% ",
+		"on-click": "alacritty -e htop"
+	},
+
+	// Memory
+	"memory": {
+		"format": "/ MEM {}% ",
+		"on-click": "alacritty -e htop"
+	},
+
+	// Harddisc space used
+	"disk": {
+		"interval": 30,
+		"format": "DISK {percentage_used}% ",
+		"path": "/",
+		"on-click": "alacritty -e htop"
+	}, 
+
+	// Languaje
+	"hyprland/language": {
+		"format": "/ {short}"
+	},
+
+	// Battery
+	"battery": {
+		"states": {
+			// "good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": "  {capacity}%",
+		"format-plugged": "  {capacity}%",
+		"format-alt": "{icon} {time}",
+		// "format-good": "", // An empty format will hide the module
+		// "format-full": "",
+		"format-icons": [" ", " ", " ", " ", " "]
+	},
+
+	// Network
+	"network": {
+		"format": "{ifname}",
+		"format-wifi": "   {signalStrength}%",
+		"format-ethernet": "  {ipaddr}",
+		"format-disconnected": "Not connected", //An empty format will hide the module.
+		"tooltip-format": " {ifname} via {gwaddri}",
+		"tooltip-format-wifi": "   {essid} ({signalStrength}%)",
+		"tooltip-format-ethernet": "  {ifname} ({ipaddr}/{cidr})",
+		"tooltip-format-disconnected": "Disconnected",
+		"max-length": 50,
+		"on-click": "alacritty -e nmtui"
+	},
+
+	// Hardware group
+	"group/hardware": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 500,
+			"children-class": "not-memory",
+			"transition-left-to-right": false
+		},        
+		"modules": [
+			"custom/system",
+			"disk",
+			"cpu",
+			"memory",
+			"hyprland/language"
+		]
+	},
+
+	// Clock
+	"clock": {
+		"format": "{:%H:%M}   ",
+		"format-alt": "{:%A, %B %d, %Y ( %R )}  ",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode"          : "year",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "right",
+			"on-scroll"     : 1,
+			"format": {
+				"months":     "<span color='#ffead3'><b>{}</b></span>",
+				"days":       "<span color='#ecc6d9'><b>{}</b></span>",
+				"weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+				"weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+				"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions":  {
+			"on-click-right": "mode",
+			"on-scroll-up": "tz_up",
+			"on-scroll-down": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	},
+
+	"group/right-modules": {
+		"orientation": "inherit",
+		"modules": [
+			"pulseaudio",
+			"bluetooth",
+			"keyboard-state",
+			"battery", 
+			"network",
+			"group/hardware",
+			"clock"
+		]
+	},
+}
