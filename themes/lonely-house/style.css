@@ -103,7 +103,7 @@ tooltip label {
 #left-modules {
     background: @mainColor;
     color: @lightColor;
-    margin: 5px 1px 6px 1px;
+    margin: 5px 1px 1px 8px;
     padding: 1px 1px;
     border-radius: 20px;
     border: 0px;
@@ -116,7 +116,7 @@ tooltip label {
 #right-modules {
     background: @mainColor;
     color: @lightColor;
-    margin: 5px 1px 6px 1px;
+    margin: 5px 8px 1px 1px;
     padding: 1px 1px;
     border-radius: 20px;
     border: 0px;
